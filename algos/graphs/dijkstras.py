@@ -10,7 +10,7 @@ class Graph:
         self.nodes = nodes
         self.size = len(nodes)
 
-# use case - single-pair shortest path (SPSP). ONLY works
+# use case - single-source shortest path (SSSP). ONLY works
 #            if you're guaranteed not to have negative
 #            edges
 # high level - from predefined starting node, add neighbors
