@@ -43,12 +43,12 @@ def floyd_warshall(graph: Graph):
         for u in range(ROWS):
             for v in range(ROWS):
                 res[u][v] = min(res[u][v], res[u][k_idx] + res[k_idx][v])
-    for u in range(ROWS):
-        for v in range(ROWS):
-            for k in range(ROWS):
-                intrmd_node = all_nodes[k]
-                intrmd_node_val = intrmd_node.val
-                k_idx = node_idx_map[intrmd_node_val]
+    for k in range(ROWS):
+        intrmd_node = all_nodes[k]
+        intrmd_node_val = intrmd_node.val
+        k_idx = node_idx_map[intrmd_node_val]
+        for u in range(ROWS):
+            for v in range(ROWS):
                 if res[u][k_idx] + res[k_idx][v] < res[u][v]:
                     res[u][v] = float("-inf")
     return res
@@ -64,9 +64,9 @@ if __name__ == "__main__":
     zero.neighbors = [(two, 2), (four, 3)]
     one.neighbors = [(three, 1)]
     two.neighbors = [(six, 6)]
-    three.neighbors = [(four, 4)]
+    # three.neighbors = [(four, 4)]
     # line below induces negative weight cycle
-    # three.neighbors = [(four, -5)]
+    three.neighbors = [(four, -5)]
     four.neighbors = [(one, 1), (six, 4)]
     six.neighbors = [(five, 2)]
     arr = [zero,one,two,three,four,five,six]
