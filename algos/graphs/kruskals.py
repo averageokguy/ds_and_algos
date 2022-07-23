@@ -1,6 +1,4 @@
-from array import array
 import heapq
-
 
 class GraphNode:
     def __init__(self,val: str,neighbors=[]) -> None:
@@ -10,8 +8,6 @@ class GraphNode:
 class Graph:
     def __init__(self, nodes=[]) -> None:
         self.nodes = nodes
-
-
 
 def kruskals(graph: Graph):
     edges,node_idx_dict,par_arr,size_arr = [],{},[],[]
