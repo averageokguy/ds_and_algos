@@ -33,7 +33,7 @@ def prims(graph: Graph):
             continue
         visited.add(curr_neigh.val)
         node_val,neigh_val = curr_node.val,curr_neigh.val
-        # maintenance
+        # housekeeping
         total_weight+=curr_weight
         target_edges-=1
         res.append((node_val,neigh_val,curr_weight))
@@ -42,13 +42,13 @@ def prims(graph: Graph):
     return (res,total_weight)
 
 if __name__ == "__main__":
-    zero = GraphNode(0)
-    one = GraphNode(1)
-    two = GraphNode(2)
-    three = GraphNode(3)
-    four = GraphNode(4)
-    five = GraphNode(5)
-    six = GraphNode(6)
+    zero = GraphNode('a')
+    one = GraphNode('b')
+    two = GraphNode('c')
+    three = GraphNode('d')
+    four = GraphNode('e')
+    five = GraphNode('f')
+    six = GraphNode('g')
     zero.neighbors = [(two, 2), (four, 3)]
     one.neighbors = [(three, 1)]
     two.neighbors = [(six, 6)]
@@ -58,3 +58,4 @@ if __name__ == "__main__":
     arr = [zero,one,two,three,four,five,six]
     g = Graph(arr)
     res = prims(g)
+    print(res)
