@@ -9,7 +9,14 @@ class Graph:
     def __init__(self, nodes=[]) -> None:
         self.nodes = nodes
 
+# use case - minimum spanning tree
+# high level - union find algo. don't forget to compress
+#              during the find operation in order to retain
+#              true/expected runtime
+
 def kruskals(graph: Graph):
+    # node_idx_dict - necessary mapping for access to
+    # par_arr and size_arr
     edges,node_idx_dict,par_arr,size_arr = [],{},[],[]
     i=0
     for node in graph.nodes:
@@ -23,18 +30,22 @@ def kruskals(graph: Graph):
     res = []
     total_weight = 0
 
+    # find root
     def find(u):
         curr_idx = u
         root = par_arr[u]
         while curr_idx != root:
             curr_idx = par_arr[curr_idx]
             root = par_arr[root]
+        # compression
         while u != root:
             tmp = par_arr[u]
             par_arr[u] = root
             u = tmp
         return root
-    
+    # merge two currently independent components
+    # optimization - smaller comp should always
+    # be merged into larger comp
     def union(u, v):
         if size_arr[u] > size_arr[v]:
             size_arr[u]+=size_arr[v]
@@ -50,6 +61,7 @@ def kruskals(graph: Graph):
         u_idx,v_idx = node_idx_dict[u],node_idx_dict[v]
         u_par = find(u_idx)
         v_par = find(v_idx)
+        # check if they already belong to same component
         if u_par == v_par:
             continue
         # housekeeping
