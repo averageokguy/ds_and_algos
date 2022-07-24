@@ -45,7 +45,7 @@ def reconstruct_paths(ancestor_arr, node_idx_map: dict):
             print(res[i],"=>",end=" ")
         print("\n")
 
-def dijkstras(graph: Graph):
+def dijkstras(graph: Graph, start_node: GraphNode):
     # node_idx_map is used for access to min_dist[] and ancestor[]
     # since our vertices' values are letters, not nums
     min_dist,node_idx_map,ancestor_arr = [],{},[]
@@ -54,7 +54,6 @@ def dijkstras(graph: Graph):
         node_idx_map[graph.nodes[i].val] = i
         ancestor_arr.append(None)
     # picking node here for simplicity rather than passing in
-    start_node = graph.nodes[0]
     start_node_idx = node_idx_map[start_node.val]
     min_dist[start_node_idx] = 0
     heap = []
@@ -90,6 +89,6 @@ if __name__ == "__main__":
     six.neighbors = [(five, 2)]
     arr = [zero,one,two,three,four,five,six]
     g = Graph(arr)
-    (res,ancestor_arr,node_idx_map) = dijkstras(g)
+    (res,ancestor_arr,node_idx_map) = dijkstras(g,two)
     print(res)
     reconstruct_paths(ancestor_arr,node_idx_map)
